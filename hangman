@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+# coding=utf-8
+
+
+import random
+
+turns=10
+guesses=''
+
+infile=open("./word.txt", "r")#절대경로, 상대경로
+lines=infile.readlines()
+word=random.choice(lines)
+word=word.rstrip()
+word_length=len(word)
+# print(word)
+# print(word_length)
+while turns>0:
+    print(str(word_length)+"글자")
+    guess=input("입력:")
+    guesses = guesses + guess
+    if guess not in word:
+        print('너 틀렸어')
+        turns=turns-1
+        print(str(turns)+'번의 기회가 남았어')
+        if turns==0:
+            print('게임오버')
+            print('정답은 : ' + word )
+    failed=0
+    for char in word:
+        if char in guesses:
+            print(char, end='')
+        else:
+            print('_',end='')
+            failed=failed+1
+    if failed==0:
+        print('you win')
+
+infile.close()
